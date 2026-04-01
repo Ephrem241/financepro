@@ -117,7 +117,7 @@ function Nav() {
               textDecoration: 'none',
             }}
           >
-            OPEN APP
+            OPEN CALCULATOR →
           </a>
         </div>
       </div>

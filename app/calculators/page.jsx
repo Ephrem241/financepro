@@ -1,7 +1,83 @@
 import FinanceCalc from '../../components/FinanceCalc';
 
-export { calculatorsMetadata as metadata } from '../../lib/metadata';
+export const metadata = {
+  title: 'Finance Calculators — EMI, Mortgage, Tax, Investment | FinancePro',
+  description:
+    "Use FinancePro's free calculators: Loan EMI, Mortgage, Compound Interest, US Tax Bracket 2024, and Currency Converter. Instant results, no login required.",
+  keywords:
+    'EMI calculator, mortgage calculator, compound interest calculator, tax bracket 2024, currency converter, free finance tools',
+  openGraph: {
+    title: 'Finance Calculators — EMI, Mortgage, Tax, Investment | FinancePro',
+    description:
+      "Free calculators: Loan EMI, Mortgage, Compound Interest, US Tax Bracket 2024, Currency Converter. No login.",
+    url: 'https://financepro.io/calculators',
+    siteName: 'FinancePro',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://financepro.io/calculators',
+  },
+};
+
+function AdPlaceholder({ width, height }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '1.5rem 24px 0' }}>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: `${width}px`,
+          height: `${height}px`,
+          border: '1px dashed rgba(201,168,76,0.25)',
+          borderRadius: '6px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(201,168,76,0.02)',
+        }}
+      >
+        <span
+          style={{
+            fontSize: '0.6rem',
+            color: '#2a3a4a',
+            letterSpacing: '0.12em',
+            fontFamily: 'monospace',
+          }}
+        >
+          ADSENSE {width}×{height}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function CalculatorsPage() {
-  return <FinanceCalc />;
+  return (
+    <>
+      {/* Ad: above calculator card */}
+      <AdPlaceholder width={728} height={90} />
+
+      <FinanceCalc />
+
+      {/* Ad: below results */}
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '0 24px 3rem' }}>
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '300px',
+            height: '250px',
+            border: '1px dashed rgba(201,168,76,0.25)',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(201,168,76,0.02)',
+          }}
+        >
+          <span style={{ fontSize: '0.6rem', color: '#2a3a4a', letterSpacing: '0.12em', fontFamily: 'monospace' }}>
+            ADSENSE 300×250
+          </span>
+        </div>
+      </div>
+    </>
+  );
 }
