@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://financepro.io
+
+# Sitemaps
+Sitemap: https://financepro.io/sitemap.xml

@@ -19,6 +19,29 @@ export const metadata = {
   },
 };
 
+// ── JSON-LD: WebApplication ───────────────────────────────────────────────────
+const webAppJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'FinancePro Calculator',
+  url: 'https://financepro.io/calculators',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  description:
+    "Use FinancePro's free calculators: Loan EMI, Mortgage, Compound Interest, US Tax Bracket 2024, and Currency Converter. Instant results, no login required.",
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  author: {
+    '@type': 'Organization',
+    name: 'FinancePro',
+    url: 'https://financepro.io',
+  },
+};
+
 function AdPlaceholder({ width, height }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '1.5rem 24px 0' }}>
@@ -53,6 +76,11 @@ function AdPlaceholder({ width, height }) {
 export default function CalculatorsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
+      />
+
       {/* Ad: above calculator card */}
       <AdPlaceholder width={728} height={90} />
 
