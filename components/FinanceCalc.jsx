@@ -565,6 +565,210 @@ function CurrencyConverter() {
   );
 }
 
+// ── Savings Goal Planner ──────────────────────────────────────────────────────
+function SavingsGoal() {
+  const [target, setTarget]     = useState(50000);
+  const [current, setCurrent]   = useState(5000);
+  const [rate, setRate]         = useState(6);
+  const [years, setYears]       = useState(5);
+
+  const { monthlyContrib, totalContributions, interestEarned } = useMemo(() => {
+    const r = rate / 100 / 12;
+    const n = years * 12;
+    const fvCurrent = r === 0 ? current : current * Math.pow(1 + r, n);
+    const remaining = target - fvCurrent;
+
+    let monthlyContrib = 0;
+    if (remaining > 0) {
+      monthlyContrib = r === 0
+        ? remaining / n
+        : (remaining * r) / (Math.pow(1 + r, n) - 1);
+    }
+    monthlyContrib = Math.max(0, monthlyContrib);
+
+    const totalContributions = current + monthlyContrib * n;
+    const interestEarned = Math.max(0, target - totalContributions);
+    return { monthlyContrib, totalContributions, interestEarned };
+  }, [target, current, rate, years]);
+
+  return (
+    <CalcCard>
+      <Slider label="Savings Target"       value={target}  min={1000}  max={500000} step={1000} format={fmtUSD}              onChange={setTarget}  />
+      <Slider label="Current Savings"      value={current} min={0}     max={250000} step={500}  format={fmtUSD}              onChange={setCurrent} />
+      <Slider label="Expected Annual Return" value={rate}  min={0.5}   max={15}     step={0.5}  format={(v) => fmtPct(v, 1)} onChange={setRate}    />
+      <Slider label="Years to Goal"        value={years}   min={1}     max={30}     step={1}    format={(v) => `${v} yrs`}   onChange={setYears}   />
+      <Results>
+        <ResultRow label="Required Monthly Contribution" value={fmtUSD(monthlyContrib)} accent />
+        <ResultRow label="Total Contributions"           value={fmtUSD(totalContributions)} />
+        <ResultRow label="Interest Earned"               value={fmtUSD(interestEarned)} />
+        <ResultRow label="Target Reached In"             value={`${years} year${years !== 1 ? 's' : ''}`} />
+      </Results>
+    </CalcCard>
+  );
+}
+
+// ── Retirement Calculator ─────────────────────────────────────────────────────
+function Retirement() {
+  const [currentAge,    setCurrentAge]    = useState(30);
+  const [retireAge,     setRetireAge]     = useState(65);
+  const [currentSavings,setCurrentSavings]= useState(25000);
+  const [monthlyContrib,setMonthlyContrib]= useState(500);
+  const [rate,          setRate]          = useState(7);
+
+  const { projectedBalance, monthlyIncome, yearsToRetire, totalContributions } = useMemo(() => {
+    const yearsToRetire = Math.max(0, retireAge - currentAge);
+    const n = yearsToRetire * 12;
+    const r = rate / 100 / 12;
+
+    const fvSavings = r === 0
+      ? currentSavings
+      : currentSavings * Math.pow(1 + r, n);
+    const fvContribs = r === 0
+      ? monthlyContrib * n
+      : monthlyContrib * ((Math.pow(1 + r, n) - 1) / r);
+
+    const projectedBalance    = fvSavings + fvContribs;
+    const monthlyIncome       = (projectedBalance * 0.04) / 12;
+    const totalContributions  = currentSavings + monthlyContrib * n;
+    return { projectedBalance, monthlyIncome, yearsToRetire, totalContributions };
+  }, [currentAge, retireAge, currentSavings, monthlyContrib, rate]);
+
+  return (
+    <CalcCard>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 1.5rem' }}>
+        <Slider label="Current Age"      value={currentAge}     min={18}  max={70} step={1}   format={(v) => `${v} yrs`}   onChange={setCurrentAge}     />
+        <Slider label="Retirement Age"   value={retireAge}      min={45}  max={80} step={1}   format={(v) => `${v} yrs`}   onChange={setRetireAge}      />
+      </div>
+      <Slider label="Current Savings"    value={currentSavings} min={0}   max={500000} step={1000} format={fmtUSD}          onChange={setCurrentSavings} />
+      <Slider label="Monthly Contribution" value={monthlyContrib} min={0} max={5000}   step={50}  format={fmtUSD}           onChange={setMonthlyContrib} />
+      <Slider label="Expected Annual Return" value={rate}        min={1}  max={15}     step={0.5} format={(v) => fmtPct(v, 1)} onChange={setRate}        />
+      <Results>
+        <ResultRow label="Projected Balance at Retirement" value={fmtUSD(projectedBalance)} accent />
+        <ResultRow label="Monthly Income (4% Rule)"        value={fmtUSD(monthlyIncome)} />
+        <ResultRow label="Years to Retirement"             value={`${yearsToRetire} years`} />
+        <ResultRow label="Total Contributions"             value={fmtUSD(totalContributions)} />
+      </Results>
+      <p style={{ fontSize: '0.7rem', color: C.muted, marginTop: '0.75rem', fontFamily: 'var(--font-dm-mono)' }}>
+        * 4% rule historically supports 30+ years of retirement withdrawals.
+      </p>
+    </CalcCard>
+  );
+}
+
+// ── Net Worth Calculator ──────────────────────────────────────────────────────
+const NW_ASSETS      = ['Cash & Savings', 'Investments', 'Property', 'Vehicle'];
+const NW_LIABILITIES = ['Mortgage Balance', 'Car Loan', 'Credit Card', 'Student Loan'];
+
+function NetWorthField({ label, value, onChange }) {
+  return (
+    <div style={{ marginBottom: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
+      <span style={{ fontSize: '0.8125rem', color: C.sub, whiteSpace: 'nowrap', minWidth: '130px' }}>{label}</span>
+      <div style={{ position: 'relative', flex: 1 }}>
+        <span style={{ position: 'absolute', left: '0.6rem', top: '50%', transform: 'translateY(-50%)', color: C.muted, fontFamily: 'var(--font-dm-mono)', fontSize: '0.875rem', pointerEvents: 'none' }}>$</span>
+        <input
+          type="number"
+          value={value}
+          onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
+          style={{
+            width: '100%',
+            background: C.cardBg,
+            border: `1px solid ${C.cardBorder}`,
+            borderRadius: '6px',
+            color: C.white,
+            padding: '0.4rem 0.6rem 0.4rem 1.4rem',
+            fontFamily: 'var(--font-dm-mono)',
+            fontSize: '0.875rem',
+            outline: 'none',
+            boxSizing: 'border-box',
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function NetWorth() {
+  const [assets, setAssets] = useState({ 'Cash & Savings': 10000, Investments: 25000, Property: 300000, Vehicle: 15000 });
+  const [liabs,  setLiabs]  = useState({ 'Mortgage Balance': 220000, 'Car Loan': 8000, 'Credit Card': 3000, 'Student Loan': 12000 });
+
+  const setAsset = (key, val) => setAssets((prev) => ({ ...prev, [key]: val }));
+  const setLiab  = (key, val) => setLiabs((prev)  => ({ ...prev, [key]: val }));
+
+  const { totalAssets, totalLiabs, netWorth, debtRatio, assetBarPct } = useMemo(() => {
+    const totalAssets = Object.values(assets).reduce((s, v) => s + v, 0);
+    const totalLiabs  = Object.values(liabs).reduce((s, v) => s + v, 0);
+    const netWorth    = totalAssets - totalLiabs;
+    const debtRatio   = totalAssets > 0 ? (totalLiabs / totalAssets) * 100 : 0;
+    const combined    = totalAssets + totalLiabs;
+    const assetBarPct = combined > 0 ? (totalAssets / combined) * 100 : 50;
+    return { totalAssets, totalLiabs, netWorth, debtRatio, assetBarPct };
+  }, [assets, liabs]);
+
+  const isPositive = netWorth >= 0;
+
+  return (
+    <CalcCard>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 2rem' }}>
+        {/* Assets */}
+        <div>
+          <div style={{ fontSize: '0.7rem', color: C.gold, fontFamily: 'var(--font-dm-mono)', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
+            ASSETS
+          </div>
+          {NW_ASSETS.map((k) => (
+            <NetWorthField key={k} label={k} value={assets[k]} onChange={(v) => setAsset(k, v)} />
+          ))}
+        </div>
+        {/* Liabilities */}
+        <div>
+          <div style={{ fontSize: '0.7rem', color: 'rgba(220,80,80,0.8)', fontFamily: 'var(--font-dm-mono)', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
+            LIABILITIES
+          </div>
+          {NW_LIABILITIES.map((k) => (
+            <NetWorthField key={k} label={k} value={liabs[k]} onChange={(v) => setLiab(k, v)} />
+          ))}
+        </div>
+      </div>
+
+      {/* Assets vs Liabilities bar */}
+      <div style={{ marginTop: '1.5rem' }}>
+        <div style={{ height: '14px', borderRadius: '7px', overflow: 'hidden', display: 'flex', background: 'rgba(220,80,80,0.35)' }}>
+          <div
+            style={{
+              width: `${assetBarPct}%`,
+              background: C.gold,
+              opacity: 0.8,
+              transition: 'width 0.35s ease',
+              borderRadius: '7px 0 0 7px',
+              minWidth: assetBarPct > 0 ? '4px' : 0,
+            }}
+          />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.35rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+            <div style={{ width: '8px', height: '8px', background: C.gold, opacity: 0.8, borderRadius: '2px' }} />
+            <span style={{ fontSize: '0.7rem', color: C.muted, fontFamily: 'var(--font-dm-mono)' }}>Assets {assetBarPct.toFixed(0)}%</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+            <div style={{ width: '8px', height: '8px', background: 'rgba(220,80,80,0.6)', borderRadius: '2px' }} />
+            <span style={{ fontSize: '0.7rem', color: C.muted, fontFamily: 'var(--font-dm-mono)' }}>Liabilities {(100 - assetBarPct).toFixed(0)}%</span>
+          </div>
+        </div>
+      </div>
+
+      <Results>
+        <ResultRow label="Total Assets"        value={fmtUSD(totalAssets)} />
+        <ResultRow label="Total Liabilities"   value={fmtUSD(totalLiabs)} />
+        <ResultRow
+          label="Net Worth"
+          value={`${isPositive ? '' : '-'}${fmtUSD(Math.abs(netWorth))}`}
+          accent
+        />
+        <ResultRow label="Debt-to-Asset Ratio" value={fmtPct(debtRatio)} />
+      </Results>
+    </CalcCard>
+  );
+}
+
 // ── Tab config ────────────────────────────────────────────────────────────────
 const TABS = [
   { id: 'emi',      label: 'Loan EMI',          Component: LoanEMI },
@@ -572,6 +776,9 @@ const TABS = [
   { id: 'compound', label: 'Compound Interest',  Component: CompoundInterest },
   { id: 'tax',      label: 'Tax Bracket',        Component: TaxBracket },
   { id: 'currency', label: 'Currency',           Component: CurrencyConverter },
+  { id: 'savings',  label: 'Savings Goal',       Component: SavingsGoal },
+  { id: 'retire',   label: 'Retirement',         Component: Retirement },
+  { id: 'networth', label: 'Net Worth',          Component: NetWorth },
 ];
 
 // ── Main export ───────────────────────────────────────────────────────────────

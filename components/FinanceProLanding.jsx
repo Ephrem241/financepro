@@ -315,18 +315,18 @@ const TOOLS = [
     tag: null,
   },
   {
-    name: 'Investment ROI',
-    desc: 'Measure the return on any investment and compare scenarios side-by-side.',
+    name: 'Savings Goal Planner',
+    desc: 'Find the monthly contribution needed to reach any savings target on time.',
     tag: null,
   },
   {
-    name: 'Savings Goal',
-    desc: 'Work out how much to save each month to hit your target by a set date.',
+    name: 'Retirement Calculator',
+    desc: 'Project your retirement balance and monthly income using the 4% rule.',
     tag: null,
   },
   {
-    name: 'Debt Payoff',
-    desc: 'Find the fastest and cheapest way to pay down credit cards or loans.',
+    name: 'Net Worth Calculator',
+    desc: 'Track total assets vs liabilities and visualise your financial position.',
     tag: null,
   },
 ];
