@@ -1,5 +1,4 @@
 import { Cormorant_Garamond, DM_Mono } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -29,14 +28,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable}`}>
-      <body style={{ background: '#080d16', color: '#f0f4f8', minHeight: '100vh' }}>
-        {children}
-        <Script
+      <head>
+        {/* Plain <script> avoids the data-nscript attribute that AdSense rejects */}
+        <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      <body style={{ background: '#080d16', color: '#f0f4f8', minHeight: '100vh' }}>
+        {children}
       </body>
     </html>
   );
