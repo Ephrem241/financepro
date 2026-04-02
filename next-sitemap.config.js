@@ -8,7 +8,7 @@ module.exports = {
 
   // Per-path priority override; changefreq is daily for all pages
   transform: async (config, path) => {
-    const priorities = { '/': 1.0, '/calculators': 0.9 };
+    const priorities = { '/': 1.0, '/calculators': 0.9, '/blog': 0.85 };
     return {
       loc: path,
       changefreq: 'daily',

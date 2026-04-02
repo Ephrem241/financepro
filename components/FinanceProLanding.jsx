@@ -44,7 +44,7 @@ function AdSlot({ width = 728, height = 90, label }) {
 // ── Sticky Nav ────────────────────────────────────────────────────────────────
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ['Calculators', 'How It Works', 'FAQ'];
+  const links = ['Blog', 'Calculators', 'How It Works', 'FAQ'];
 
   return (
     <nav
@@ -88,7 +88,7 @@ function Nav() {
           {links.map((l) => (
             <a
               key={l}
-              href={l === 'Calculators' ? '/calculators' : `#${l.toLowerCase().replace(/ /g, '-')}`}
+              href={l === 'Calculators' ? '/calculators' : l === 'Blog' ? '/blog' : `#${l.toLowerCase().replace(/ /g, '-')}`}
               style={{
                 color: C.sub,
                 textDecoration: 'none',
