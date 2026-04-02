@@ -684,11 +684,16 @@ function Footer() {
           © {new Date().getFullYear()} — Free Finance Tools
         </span>
       </div>
-      <div style={{ display: 'flex', gap: '1.5rem' }}>
-        {['Calculators', 'Privacy', 'Contact'].map((l) => (
+      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+        {[
+          { label: 'Calculators', href: '/calculators' },
+          { label: 'About',       href: '/about' },
+          { label: 'Privacy',     href: '/privacy' },
+          { label: 'Terms',       href: '/terms' },
+        ].map(({ label, href }) => (
           <a
-            key={l}
-            href={l === 'Calculators' ? '/calculators' : '#'}
+            key={label}
+            href={href}
             style={{
               color: C.muted,
               fontSize: '0.8125rem',
@@ -700,7 +705,7 @@ function Footer() {
             onMouseEnter={(e) => (e.target.style.color = C.gold)}
             onMouseLeave={(e) => (e.target.style.color = C.muted)}
           >
-            {l}
+            {label}
           </a>
         ))}
       </div>
