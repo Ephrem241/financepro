@@ -121,7 +121,7 @@ SLUG: ${slug}
 
 DESIGN REQUIREMENTS:
 - Background #080d16, gold accent #c9a84c, muted text #8899aa
-- Google Fonts: Cormorant Garamond (headings) + DM Mono (body) via useEffect link tag
+- Fonts: use CSS variables var(--font-cormorant) for headings and var(--font-dm-mono) for body — DO NOT load fonts via useEffect or link tags, they are already loaded globally
 - Sticky nav: dark blur background, FinancePro logo left, back to blog link right
 - Hero: centered, topic category tags, h1 title, date and read time, gold divider
 - AdSense placeholder div below hero: 728x90, dashed gold border, label text ADVERTISEMENT 728x90
@@ -140,8 +140,10 @@ CONTENT REQUIREMENTS:
 
 CODE REQUIREMENTS:
 - Very first line must be exactly: // app/blog/${slug}/page.jsx
+- DO NOT include 'use client' directive — this is a Server Component
+- DO NOT use useEffect, useState, or any React hooks
 - Export metadata object with SEO title, description, keywords
-- Default export function named BlogPost
+- Default export function named BlogPost (plain function, not async)
 - All styling via inline styles only, no Tailwind
 - No external imports, plain JSX only
 
