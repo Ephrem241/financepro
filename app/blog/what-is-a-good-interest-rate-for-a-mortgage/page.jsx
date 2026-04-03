@@ -1,7 +1,5 @@
 // app/blog/what-is-a-good-interest-rate-for-a-mortgage/page.jsx
 
-import { useEffect } from "react";
-
 export const metadata = {
   title: "What Is a Good Interest Rate for a Mortgage? | FinancePro",
   description:
@@ -11,36 +9,12 @@ export const metadata = {
 };
 
 export default function BlogPost() {
-  useEffect(() => {
-    const link1 = document.createElement("link");
-    link1.rel = "preconnect";
-    link1.href = "https://fonts.googleapis.com";
-    document.head.appendChild(link1);
-
-    const link2 = document.createElement("link");
-    link2.rel = "preconnect";
-    link2.href = "https://fonts.gstatic.com";
-    link2.crossOrigin = "anonymous";
-    document.head.appendChild(link2);
-
-    const link3 = document.createElement("link");
-    link3.rel = "stylesheet";
-    link3.href =
-      "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&display=swap";
-    document.head.appendChild(link3);
-
-    return () => {
-      document.head.removeChild(link1);
-      document.head.removeChild(link2);
-      document.head.removeChild(link3);
-    };
-  }, []);
 
   const styles = {
     page: {
       backgroundColor: "#080d16",
       minHeight: "100vh",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       color: "#e2e8f0",
       lineHeight: "1.8",
     },
@@ -57,7 +31,7 @@ export default function BlogPost() {
       borderBottom: "1px solid rgba(201, 168, 76, 0.2)",
     },
     logo: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "24px",
       fontWeight: "700",
       color: "#c9a84c",
@@ -65,7 +39,7 @@ export default function BlogPost() {
       letterSpacing: "0.05em",
     },
     backLink: {
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: "13px",
       color: "#8899aa",
       textDecoration: "none",
@@ -89,7 +63,7 @@ export default function BlogPost() {
     },
     tag: {
       fontSize: "11px",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       color: "#c9a84c",
       border: "1px solid rgba(201, 168, 76, 0.4)",
       padding: "4px 12px",
@@ -98,7 +72,7 @@ export default function BlogPost() {
       textTransform: "uppercase",
     },
     h1: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "clamp(32px, 5vw, 52px)",
       fontWeight: "700",
       color: "#ffffff",
@@ -139,7 +113,7 @@ export default function BlogPost() {
       color: "#8899aa",
       fontSize: "12px",
       letterSpacing: "0.1em",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       backgroundColor: "rgba(201, 168, 76, 0.03)",
     },
     article: {
@@ -148,7 +122,7 @@ export default function BlogPost() {
       padding: "0 24px 80px",
     },
     h2: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "clamp(24px, 3.5vw, 34px)",
       fontWeight: "600",
       color: "#c9a84c",
@@ -178,7 +152,7 @@ export default function BlogPost() {
       color: "#c9a84c",
       padding: "14px 20px",
       textAlign: "left",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: "12px",
       letterSpacing: "0.08em",
       textTransform: "uppercase",
@@ -188,14 +162,14 @@ export default function BlogPost() {
       padding: "13px 20px",
       color: "#c8d6e5",
       borderBottom: "1px solid rgba(255,255,255,0.05)",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: "14px",
     },
     tdHighlight: {
       padding: "13px 20px",
       color: "#4ade80",
       borderBottom: "1px solid rgba(255,255,255,0.05)",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: "14px",
       fontWeight: "500",
     },
@@ -207,7 +181,7 @@ export default function BlogPost() {
       margin: "32px 0",
     },
     tipsTitle: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "22px",
       color: "#c9a84c",
       marginBottom: "20px",
@@ -247,7 +221,7 @@ export default function BlogPost() {
       textAlign: "center",
     },
     ctaTitle: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "26px",
       color: "#ffffff",
       marginBottom: "12px",
@@ -264,7 +238,7 @@ export default function BlogPost() {
       padding: "14px 36px",
       background: "linear-gradient(135deg, #c9a84c 0%, #a07830 100%)",
       color: "#080d16",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: "13px",
       fontWeight: "500",
       letterSpacing: "0.08em",
@@ -302,7 +276,7 @@ export default function BlogPost() {
       marginBottom: "40px",
     },
     footerLogo: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: "26px",
       fontWeight: "700",
       color: "#c9a84c",
@@ -312,7 +286,7 @@ export default function BlogPost() {
       fontSize: "12px",
       color: "#8899aa",
       marginTop: "6px",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
     },
     footerNav: {
       display: "flex",
@@ -324,7 +298,7 @@ export default function BlogPost() {
       fontSize: "13px",
       color: "#8899aa",
       textDecoration: "none",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
     },
     footerCopy: {
       fontSize: "12px",
@@ -332,7 +306,7 @@ export default function BlogPost() {
       textAlign: "center",
       paddingTop: "24px",
       borderTop: "1px solid rgba(255,255,255,0.05)",
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
     },
   };
 
@@ -383,4 +357,127 @@ export default function BlogPost() {
         </p>
 
         <h2 style={styles.h2}>Understanding Mortgage Rate Benchmarks in 2026</h2>
-        <p style={styles.p
+        <p style={styles.p}>
+          As of early 2026, the national average 30-year fixed mortgage rate sits between <span style={styles.highlight}>6.0% and 7.0%</span> for well-qualified borrowers, following the Federal Reserve's gradual rate adjustments since 2023. A rate below the national average for your loan type is generally considered "good." A rate at or below <span style={styles.highlight}>6.25% on a 30-year fixed</span> or <span style={styles.highlight}>5.50% on a 15-year fixed</span> would be considered excellent by today's standards.
+        </p>
+
+        <p style={styles.p}>
+          Historically, rates in the 3–4% range (seen in 2020–2021) were exceptional and unlikely to return soon. However, rates in the mid-6% range are well below the 40-year historical average of approximately <span style={styles.highlight}>7.74%</span>, meaning today's market is still favorable compared to most of modern mortgage history.
+        </p>
+
+        <h2 style={styles.h2}>How Your Credit Score Affects Your Mortgage Rate</h2>
+
+        <p style={styles.p}>
+          Your credit score is the single most controllable factor in your mortgage rate. Lenders use it to assess risk — the higher your score, the lower the rate they offer. Here's what borrowers in each credit tier can expect on a $300,000 30-year fixed mortgage in 2026:
+        </p>
+
+        <div style={styles.tableWrapper}>
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                {['Credit Score', '30-Yr Fixed Rate', '15-Yr Fixed Rate', 'Est. Monthly Payment', 'Rating'].map(h => (
+                  <th key={h} style={styles.th}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((row, i) => (
+                <tr key={i}>
+                  <td style={styles.td}>{row.credit}</td>
+                  <td style={row.label === 'excellent' || row.label === 'good' ? styles.tdHighlight : styles.td}>{row.rate30}</td>
+                  <td style={styles.td}>{row.rate15}</td>
+                  <td style={styles.td}>{row.monthly}</td>
+                  <td style={styles.td}>{row.label.charAt(0).toUpperCase() + row.label.slice(1)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p style={styles.p}>
+          The difference between a 760 and a 640 credit score costs roughly <span style={styles.highlight}>$159/month</span> on a $300,000 loan — that's over <span style={styles.highlight}>$57,000 across 30 years</span>. Improving your score before applying can be one of the highest-ROI financial moves you make.
+        </p>
+
+        <h2 style={styles.h2}>Fixed vs. Adjustable Rate Mortgages</h2>
+
+        <p style={styles.p}>
+          A <span style={styles.highlight}>fixed-rate mortgage</span> locks your interest rate for the life of the loan — typically 15 or 30 years. Your principal and interest payment never changes, making budgeting straightforward. This is the right choice if you plan to stay in the home long-term or want predictability regardless of rate movements.
+        </p>
+
+        <p style={styles.p}>
+          An <span style={styles.highlight}>adjustable-rate mortgage (ARM)</span> offers a lower introductory rate for an initial fixed period (commonly 5, 7, or 10 years), then adjusts annually based on a market index. A 7/1 ARM at 5.50% might save you $150–$250/month compared to a 30-year fixed at 6.75% — but carries rate risk after the fixed period. ARMs are best suited for buyers who plan to sell or refinance within the initial fixed window.
+        </p>
+
+        {/* CTA MID-ARTICLE */}
+        <div style={styles.ctaBox}>
+          <p style={styles.ctaTitle}>Model Your Mortgage Payments Instantly</p>
+          <p style={styles.ctaText}>Use our free Mortgage Calculator to compare fixed vs. ARM scenarios, see total interest paid, and find the payment that fits your budget.</p>
+          <a href="/calculators" style={styles.ctaButton}>Try the Free Calculator</a>
+        </div>
+
+        <h2 style={styles.h2}>7 Proven Ways to Secure a Lower Mortgage Rate</h2>
+
+        <div style={styles.tipsBox}>
+          <p style={styles.tipsTitle}>Steps to Take Before You Apply</p>
+          {[
+            { num: '1', text: 'Raise your credit score above 760. Pay down revolving balances to below 30% utilization, dispute any errors on your report, and avoid new credit inquiries 6 months before applying.' },
+            { num: '2', text: 'Put down 20% or more. This eliminates private mortgage insurance (PMI) and signals low risk to lenders, often unlocking better rate tiers.' },
+            { num: '3', text: 'Shop at least 3–5 lenders. Mortgage rates vary significantly between banks, credit unions, and mortgage brokers. Getting multiple quotes can save 0.25–0.50% — thousands over the loan life.' },
+            { num: '4', text: 'Choose a 15-year term if affordable. 15-year rates are typically 0.50–0.75% lower than 30-year rates, and you pay far less total interest despite the higher monthly payment.' },
+            { num: '5', text: 'Buy mortgage points. One point costs 1% of the loan and lowers your rate by roughly 0.25%. If you plan to stay long-term, points often pay for themselves within 4–6 years.' },
+            { num: '6', text: 'Lock your rate at the right time. Rate locks protect you from market increases during underwriting. Watch Fed meeting schedules and economic data releases, as these events move rates.' },
+            { num: '7', text: 'Reduce your debt-to-income ratio (DTI) below 36%. Pay down existing debts before applying. Lenders use DTI as a key qualifier — lower DTI gives you access to better rate tiers.' },
+          ].map(tip => (
+            <div key={tip.num} style={styles.tipItem}>
+              <div style={styles.tipNumber}>{tip.num}</div>
+              <p style={styles.tipText}>{tip.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={styles.h2}>When Does It Make Sense to Refinance?</h2>
+
+        <p style={styles.p}>
+          If current rates are at least <span style={styles.highlight}>0.75–1.00% below your existing rate</span>, refinancing is worth evaluating. Calculate your break-even point: divide closing costs (typically $2,000–$6,000) by your monthly savings. If you plan to stay in the home past the break-even date — commonly 24–36 months — refinancing makes mathematical sense.
+        </p>
+
+        <p style={styles.p}>
+          Cash-out refinancing, where you borrow against home equity, comes with a slightly higher rate than a standard rate-and-term refinance. Use FinancePro's Mortgage Calculator to model refinancing scenarios and see exactly how much you'd save under different rate and term combinations.
+        </p>
+
+        {/* CTA END */}
+        <div style={styles.ctaBox}>
+          <p style={styles.ctaTitle}>Compare Mortgage Scenarios Side by Side</p>
+          <p style={styles.ctaText}>Our free Mortgage Calculator shows monthly payments, total interest, and amortization schedules. No login, instant results.</p>
+          <a href="/calculators" style={styles.ctaButton}>Open Free Calculators</a>
+        </div>
+
+        <div style={styles.disclaimer}>
+          <strong style={{ color: '#b8c8d8' }}>Disclaimer:</strong> This article is for informational purposes only and does not constitute financial or mortgage advice. Mortgage rates, terms, and eligibility vary by lender, borrower profile, and market conditions. Always consult a licensed mortgage professional or financial advisor before making home financing decisions.
+        </div>
+
+      </article>
+
+      {/* FOOTER */}
+      <footer style={styles.footer}>
+        <div style={styles.footerInner}>
+          <div style={styles.footerTop}>
+            <div>
+              <a href="/" style={styles.footerLogo}>FinancePro</a>
+              <p style={styles.footerTagline}>Free financial tools for smarter decisions.</p>
+            </div>
+            <nav style={styles.footerNav}>
+              <a href="/" style={styles.footerLink}>Home</a>
+              <a href="/calculators" style={styles.footerLink}>Calculators</a>
+              <a href="/blog" style={styles.footerLink}>Blog</a>
+              <a href="/about" style={styles.footerLink}>About</a>
+              <a href="/privacy" style={styles.footerLink}>Privacy</a>
+            </nav>
+          </div>
+          <p style={styles.footerCopy}>© {new Date().getFullYear()} FinancePro. All rights reserved.</p>
+        </div>
+      </footer>
+
+    </div>
+  );
+}

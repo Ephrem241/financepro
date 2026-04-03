@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#080d16"/>
+  <text x="256" y="300" font-family="Georgia, serif" font-size="220" font-weight="700"
+        fill="#c9a84c" text-anchor="middle" dominant-baseline="middle">FP</text>
+  <rect x="80" y="370" width="352" height="3" rx="2" fill="rgba(201,168,76,0.4)"/>
+</svg>

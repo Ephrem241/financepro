@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 // ── Brand tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -52,9 +53,11 @@ function Nav() {
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        background: 'rgba(8,13,22,0.92)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: `1px solid ${C.cardBorder}`,
+        background: 'rgba(8,13,22,0.65)',
+        backdropFilter: 'blur(20px) saturate(150%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(150%)',
+        borderBottom: `1px solid rgba(255, 255, 255, 0.05)`,
+        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
       }}
     >
       <div
@@ -127,6 +130,8 @@ function Nav() {
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 function Hero() {
+  const [loanAmount, setLoanAmount] = useState(50000);
+
   return (
     <section
       style={{
@@ -134,6 +139,9 @@ function Hero() {
         overflow: 'hidden',
         padding: '100px 24px 80px',
         textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }}
     >
       {/* Radial glow */}
@@ -142,12 +150,17 @@ function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
 
-      <div style={{ position: 'relative', maxWidth: '780px', margin: '0 auto' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        style={{ position: 'relative', maxWidth: '880px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div
           style={{
             display: 'inline-block',
@@ -192,8 +205,53 @@ function Hero() {
           Loan EMI, Mortgage, Compound Interest, US Tax Brackets, Currency Converter and more — all in one place, completely free.
         </p>
 
+        {/* Live Demo Widget */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          style={{
+            background: 'rgba(255,255,255,0.03)',
+            backdropFilter: 'blur(16px)',
+            border: `1px solid rgba(255,255,255,0.1)`,
+            borderRadius: '16px',
+            padding: '1.5rem',
+            maxWidth: '480px',
+            width: '100%',
+            marginBottom: '2.5rem',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+            textAlign: 'left'
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+            <span style={{ color: C.sub, fontSize: '0.875rem' }}>Quick Estimate: <strong style={{ color: C.white }}>Personal Loan</strong></span>
+            <span style={{ color: C.gold, fontFamily: 'var(--font-dm-mono)' }}>8.5% APR</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <span style={{ color: C.muted, fontSize: '0.75rem' }}>Loan Amount</span>
+            <span style={{ color: C.white, fontWeight: 600 }}>${loanAmount.toLocaleString()}</span>
+          </div>
+          <input 
+            type="range" 
+            min="5000" 
+            max="100000" 
+            step="1000" 
+            value={loanAmount} 
+            onChange={(e) => setLoanAmount(Number(e.target.value))}
+            style={{ width: '100%', cursor: 'pointer', marginBottom: '1.5rem', accentColor: C.gold }}
+          />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(201,168,76,0.1)', padding: '1rem', borderRadius: '8px', border: `1px solid ${C.goldDim}` }}>
+            <span style={{ color: C.sub, fontSize: '0.875rem' }}>Est. Monthly Payment (5 yrs)</span>
+            <span style={{ color: C.gold, fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-dm-mono)' }}>
+              ${Math.round(((loanAmount * (0.085/12)) * Math.pow(1 + (0.085/12), 60)) / (Math.pow(1 + (0.085/12), 60) - 1)).toLocaleString()}
+            </span>
+          </div>
+        </motion.div>
+
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="/calculators"
             style={{
               display: 'inline-flex',
@@ -208,11 +266,14 @@ function Hero() {
               fontSize: '0.875rem',
               letterSpacing: '0.06em',
               textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(201,168,76,0.3)'
             }}
           >
-            START CALCULATING →
-          </a>
-          <a
+            OPEN FULL SUITE →
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="#how-it-works"
             style={{
               display: 'inline-flex',
@@ -228,9 +289,9 @@ function Hero() {
             }}
           >
             HOW IT WORKS
-          </a>
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -334,7 +395,13 @@ const TOOLS = [
 function CalculatorGrid() {
   return (
     <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '72px 24px 48px' }}>
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ textAlign: 'center', marginBottom: '3rem' }}
+      >
         <h2
           style={{
             fontFamily: 'var(--font-cormorant)',
@@ -349,37 +416,35 @@ function CalculatorGrid() {
         <p style={{ color: C.sub, maxWidth: '500px', margin: '0 auto', lineHeight: 1.6 }}>
           Everything from daily budgeting to long-term investment planning.
         </p>
-      </div>
+      </motion.div>
 
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: '1rem',
+          gap: '1.25rem',
         }}
       >
-        {TOOLS.map(({ name, desc, tag }) => (
-          <a
+        {TOOLS.map(({ name, desc, tag }, index) => (
+          <motion.a
             key={name}
             href="/calculators"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0,0,0,0.5)', borderColor: C.goldBorder, background: C.goldDim }}
             style={{
               display: 'block',
-              background: C.cardBg,
-              border: `1px solid ${C.cardBorder}`,
-              borderRadius: '12px',
+              background: 'rgba(255,255,255,0.03)',
+              backdropFilter: 'blur(10px)',
+              border: `1px solid rgba(255,255,255,0.05)`,
+              borderRadius: '16px',
               padding: '1.5rem',
               textDecoration: 'none',
-              transition: 'border-color 0.2s, background 0.2s',
+              transition: 'background 0.3s, border-color 0.3s',
               position: 'relative',
               overflow: 'hidden',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = C.goldBorder;
-              e.currentTarget.style.background = C.goldDim;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = C.cardBorder;
-              e.currentTarget.style.background = C.cardBg;
             }}
           >
             {tag && (
@@ -419,7 +484,7 @@ function CalculatorGrid() {
             </div>
             <div style={{ color: C.gold, fontWeight: 600, marginBottom: '0.5rem', fontSize: '1rem' }}>{name}</div>
             <div style={{ color: C.muted, fontSize: '0.85rem', lineHeight: 1.55 }}>{desc}</div>
-          </a>
+          </motion.a>
         ))}
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const C = {
@@ -95,10 +96,13 @@ function CalcCard({ children }) {
   return (
     <div
       style={{
-        background: C.cardBg,
-        border: `1px solid ${C.cardBorder}`,
-        borderRadius: '14px',
+        background: 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: `1px solid rgba(255,255,255,0.08)`,
+        borderRadius: '16px',
         padding: '1.75rem',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
       }}
     >
       {children}
@@ -127,10 +131,22 @@ function LoanEMI() {
       <Slider label="Annual Interest Rate" value={rate} min={0.5} max={30} step={0.1} format={(v) => fmtPct(v, 1)} onChange={setRate} />
       <Slider label="Loan Term" value={months} min={6} max={360} step={6} format={(v) => `${v} months`} onChange={setMonths} />
       <Results>
-        <ResultRow label="Monthly EMI" value={fmtUSD(emi)} accent />
-        <ResultRow label="Total Payment" value={fmtUSD(totalPayment)} />
-        <ResultRow label="Total Interest" value={fmtUSD(totalInterest)} />
-        <ResultRow label="Interest % of Loan" value={fmtPct((totalInterest / principal) * 100)} />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center' }}>
+          <div style={{ flex: '1 1 200px' }}>
+            <ResultRow label="Monthly EMI" value={fmtUSD(emi)} accent />
+            <ResultRow label="Total Payment" value={fmtUSD(totalPayment)} />
+            <ResultRow label="Total Interest" value={fmtUSD(totalInterest)} />
+            <ResultRow label="Interest % of Loan" value={fmtPct((totalInterest / principal) * 100)} />
+          </div>
+          <div style={{ width: '120px', height: '120px', flexShrink: 0, margin: '0 auto' }}>
+             <PieChart width={120} height={120}>
+               <Pie data={[{ name: 'Principal', value: principal, color: 'rgba(255,255,255,0.15)' }, { name: 'Interest', value: totalInterest, color: C.gold }]} dataKey="value" innerRadius={35} outerRadius={55} paddingAngle={2} stroke="none">
+                 {[{ color: 'rgba(255,255,255,0.15)' }, { color: C.gold }].map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+               </Pie>
+               <RechartsTooltip formatter={(val) => fmtUSD(val)} contentStyle={{ background: '#0B1120', border: `1px solid rgba(201,168,76,0.25)`, borderRadius: '8px', color: '#fff', fontSize: '12px' }} itemStyle={{ color: '#fff' }} />
+             </PieChart>
+          </div>
+        </div>
       </Results>
     </CalcCard>
   );
@@ -188,10 +204,22 @@ function Mortgage() {
       </div>
 
       <Results>
-        <ResultRow label="Monthly Payment" value={fmtUSD(monthly)} accent />
-        <ResultRow label="Loan Amount" value={fmtUSD(loanAmount)} />
-        <ResultRow label="Total Payment" value={fmtUSD(totalPayment)} />
-        <ResultRow label="Total Interest" value={fmtUSD(totalInterest)} />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center' }}>
+          <div style={{ flex: '1 1 200px' }}>
+            <ResultRow label="Monthly Payment" value={fmtUSD(monthly)} accent />
+            <ResultRow label="Loan Amount" value={fmtUSD(loanAmount)} />
+            <ResultRow label="Total Payment" value={fmtUSD(totalPayment)} />
+            <ResultRow label="Total Interest" value={fmtUSD(totalInterest)} />
+          </div>
+          <div style={{ width: '120px', height: '120px', flexShrink: 0, margin: '0 auto' }}>
+             <PieChart width={120} height={120}>
+               <Pie data={[{ name: 'Principal', value: loanAmount, color: 'rgba(255,255,255,0.15)' }, { name: 'Interest', value: totalInterest, color: C.gold }]} dataKey="value" innerRadius={35} outerRadius={55} paddingAngle={2} stroke="none">
+                 {[{ color: 'rgba(255,255,255,0.15)' }, { color: C.gold }].map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+               </Pie>
+               <RechartsTooltip formatter={(val) => fmtUSD(val)} contentStyle={{ background: '#0B1120', border: `1px solid rgba(201,168,76,0.25)`, borderRadius: '8px', color: '#fff', fontSize: '12px' }} itemStyle={{ color: '#fff' }} />
+             </PieChart>
+          </div>
+        </div>
       </Results>
     </CalcCard>
   );

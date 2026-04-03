@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Maskable: safe zone is central 80% (64px padding each side) -->
+  <rect width="512" height="512" fill="#080d16"/>
+  <text x="256" y="290" font-family="Georgia, serif" font-size="200" font-weight="700"
+        fill="#c9a84c" text-anchor="middle" dominant-baseline="middle">FP</text>
+  <rect x="100" y="370" width="312" height="3" rx="2" fill="rgba(201,168,76,0.4)"/>
+</svg>

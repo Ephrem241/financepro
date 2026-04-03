@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, DM_Mono } from 'next/font/google';
 import './globals.css';
+import PwaRegister from './pwa-register';
 
 const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
@@ -29,6 +30,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable}`}>
       <head>
+        {/* PWA */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#c9a84c" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="FinancePro" />
+        <link rel="apple-touch-icon" href="/icons/icon.svg" />
         {/* Plain <script> avoids the data-nscript attribute that AdSense rejects */}
         <script
           async
@@ -38,6 +47,7 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ background: '#080d16', color: '#f0f4f8', minHeight: '100vh' }}>
         {children}
+        <PwaRegister />
       </body>
     </html>
   );
