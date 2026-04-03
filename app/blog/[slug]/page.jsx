@@ -6,7 +6,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
   if (!article) return {};
   return {
     title: `${article.title} | FinancePro Blog`,
@@ -425,8 +426,9 @@ const CALC_LINKS = {
   'power-of-compound-interest':      { label: 'Try the free Compound Interest Calculator →', href: '/calculators' },
 };
 
-export default function ArticlePage({ params }) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+export default async function ArticlePage({ params }) {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
   if (!article) notFound();
 
   const ArticleContent = ARTICLE_CONTENT[article.slug];

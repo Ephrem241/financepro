@@ -14,6 +14,23 @@ import https from "https";
 import { execSync } from "child_process";
 
 // ============================================================
+// Load .env.local manually (Node doesn't auto-load it)
+// ============================================================
+const envPath = path.join(process.cwd(), ".env.local");
+if (fs.existsSync(envPath)) {
+  const lines = fs.readFileSync(envPath, "utf8").split("\n");
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eqIdx = trimmed.indexOf("=");
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    const val = trimmed.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, "");
+    if (key && !(key in process.env)) process.env[key] = val;
+  }
+}
+
+// ============================================================
 // API key is read from .env.local — set ANTHROPIC_API_KEY there
 // ============================================================
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
@@ -193,6 +210,50 @@ const req = https.request(options, (res) => {
 
       const sizeKB = (jsxContent.length / 1024).toFixed(1);
       console.log(`✅ File saved: ${filePath} (${sizeKB} KB)\n`);
+
+      // ============================================================
+      // UPDATE lib/articles.js
+      // ============================================================
+      const articlesPath = path.join("lib", "articles.js");
+      const articlesContent = fs.readFileSync(articlesPath, "utf8");
+
+      if (!articlesContent.includes(`slug: '${slug}'`)) {
+        // Derive title from topic
+        const title = topic
+          .split(" ")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
+
+        // Derive category from topic keywords
+        let category = "Personal Finance";
+        if (/mortgage|loan|emi|debt|interest rate/i.test(topic)) category = "Loans";
+        else if (/tax|bracket|irs/i.test(topic)) category = "Tax";
+        else if (/invest|index fund|401k|ira|stock|compound|dollar cost|fiduciary/i.test(topic)) category = "Investing";
+        else if (/budget|save|saving|emergency fund/i.test(topic)) category = "Budgeting";
+        else if (/credit score|credit card|utilization/i.test(topic)) category = "Credit";
+        else if (/salary|income|wealth|net worth|passive/i.test(topic)) category = "Wealth";
+        else if (/retirement/i.test(topic)) category = "Retirement";
+
+        const newArticle = `  {
+    slug: '${slug}',
+    title: '${title}',
+    excerpt: 'A practical guide to ${topic} — with real numbers, examples, and free calculator tools.',
+    category: '${category}',
+    date: '${today}',
+    readTime: '6 min read',
+    metaDescription: 'Learn about ${topic}. Free guide with examples and tools from FinancePro.',
+  },`;
+
+        const updated = articlesContent.replace(
+          "export const ARTICLES = [",
+          `export const ARTICLES = [\n${newArticle}`
+        );
+
+        fs.writeFileSync(articlesPath, updated, "utf8");
+        console.log(`✅ Registered in lib/articles.js (${category})\n`);
+      } else {
+        console.log(`⚠️  Slug already in lib/articles.js — skipping\n`);
+      }
 
       // ============================================================
       // AUTO GIT COMMIT AND PUSH

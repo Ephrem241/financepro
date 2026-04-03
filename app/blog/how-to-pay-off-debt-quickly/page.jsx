@@ -1,7 +1,4 @@
 // app/blog/how-to-pay-off-debt-quickly/page.jsx
-'use client';
-
-import { useEffect } from 'react';
 
 export const metadata = {
   title: 'How to Pay Off Debt Quickly | FinancePro',
@@ -10,29 +7,13 @@ export const metadata = {
 };
 
 export default function BlogPost() {
-  useEffect(() => {
-    const link1 = document.createElement('link');
-    link1.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap';
-    link1.rel = 'stylesheet';
-    document.head.appendChild(link1);
-
-    const link2 = document.createElement('link');
-    link2.href = 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap';
-    link2.rel = 'stylesheet';
-    document.head.appendChild(link2);
-
-    return () => {
-      document.head.removeChild(link1);
-      document.head.removeChild(link2);
-    };
-  }, []);
 
   const styles = {
     page: {
       backgroundColor: '#080d16',
       minHeight: '100vh',
       color: '#cdd6e0',
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: '15px',
       lineHeight: '1.8',
     },
@@ -50,7 +31,7 @@ export default function BlogPost() {
       justifyContent: 'space-between',
     },
     navLogo: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: '22px',
       fontWeight: '700',
       color: '#c9a84c',
@@ -58,7 +39,7 @@ export default function BlogPost() {
       letterSpacing: '0.04em',
     },
     navLink: {
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: '13px',
       color: '#8899aa',
       textDecoration: 'none',
@@ -88,12 +69,12 @@ export default function BlogPost() {
       padding: '4px 14px',
       borderRadius: '20px',
       fontSize: '12px',
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       letterSpacing: '0.08em',
       textTransform: 'uppercase',
     },
     h1: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: 'clamp(36px, 5vw, 58px)',
       fontWeight: '700',
       color: '#f0e6cc',
@@ -138,7 +119,7 @@ export default function BlogPost() {
       padding: '0 24px',
     },
     h2: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: 'clamp(24px, 3vw, 34px)',
       fontWeight: '600',
       color: '#e8d9b8',
@@ -176,7 +157,7 @@ export default function BlogPost() {
       fontSize: '12px',
       letterSpacing: '0.1em',
       textTransform: 'uppercase',
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       borderBottom: '1px solid rgba(201, 168, 76, 0.2)',
     },
     td: {
@@ -184,7 +165,7 @@ export default function BlogPost() {
       fontSize: '14px',
       color: '#b8c8d8',
       borderBottom: '1px solid rgba(255,255,255,0.05)',
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
     },
     tdStrong: {
       color: '#e8d9b8',
@@ -199,7 +180,7 @@ export default function BlogPost() {
       marginTop: '32px',
     },
     tipsTitle: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: '22px',
       fontWeight: '600',
       color: '#e8d9b8',
@@ -240,7 +221,7 @@ export default function BlogPost() {
       margin: '52px 0',
     },
     ctaTitle: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: '28px',
       fontWeight: '700',
       color: '#f0e6cc',
@@ -260,7 +241,7 @@ export default function BlogPost() {
       padding: '14px 36px',
       borderRadius: '6px',
       textDecoration: 'none',
-      fontFamily: "'DM Mono', monospace",
+      fontFamily: "var(--font-dm-mono), monospace",
       fontSize: '13px',
       fontWeight: '500',
       letterSpacing: '0.08em',
@@ -283,7 +264,7 @@ export default function BlogPost() {
       textAlign: 'center',
     },
     footerLogo: {
-      fontFamily: "'Cormorant Garamond', serif",
+      fontFamily: "var(--font-cormorant), serif",
       fontSize: '26px',
       fontWeight: '700',
       color: '#c9a84c',
@@ -363,4 +344,125 @@ export default function BlogPost() {
         <h2 style={styles.h2}>Understanding the True Cost of Debt</h2>
 
         <p style={styles.p}>
-          Before choosing a repayment strategy, it
+          Before choosing a repayment strategy, it's critical to understand exactly how much your debt is actually costing you. A $10,000 credit card balance at <span style={styles.highlight}>24.99% APR</span> costs approximately <span style={styles.highlight}>$2,499 per year in interest alone</span>. That's money that could go toward building wealth — not servicing debt. List every account's balance and interest rate, and you'll have a clear picture of where to focus first.
+        </p>
+
+        <p style={styles.p}>
+          High-interest debt grows exponentially if you only make minimum payments. A $5,000 balance at 22% APR with a $100 monthly minimum takes over <span style={styles.highlight}>8 years</span> to pay off and costs more than <span style={styles.highlight}>$5,400 in interest</span> — nearly doubling the original amount. The sooner you act aggressively, the less you pay overall.
+        </p>
+
+        <h2 style={styles.h2}>The 5 Most Effective Debt Repayment Strategies</h2>
+
+        <p style={styles.p}>
+          Not every method works for every person. Your choice should depend on your total balances, interest rates, income stability, and personal motivation style. Here's how the top five strategies compare:
+        </p>
+
+        <div style={styles.tableWrapper}>
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                {['Strategy', 'Focus', 'Best For', 'Interest Savings', 'Speed'].map(h => (
+                  <th key={h} style={styles.th}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((row, i) => (
+                <tr key={i}>
+                  <td style={{ ...styles.td, ...styles.tdStrong }}>{row.method}</td>
+                  <td style={styles.td}>{row.focus}</td>
+                  <td style={styles.td}>{row.bestFor}</td>
+                  <td style={styles.td}>{row.savings}</td>
+                  <td style={styles.td}>{row.speed}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2 style={styles.h2}>Debt Avalanche vs. Debt Snowball: Which Is Right for You?</h2>
+
+        <p style={styles.p}>
+          The <span style={styles.highlight}>Debt Avalanche</span> method directs every extra dollar toward the highest-interest debt while paying minimums on the rest. Mathematically, this is optimal — you pay less interest over time. For example, if you have a credit card at 24.99%, a personal loan at 12%, and a student loan at 6.5%, you attack the credit card first. This approach can save thousands versus the snowball method on a typical debt load.
+        </p>
+
+        <p style={styles.p}>
+          The <span style={styles.highlight}>Debt Snowball</span> method targets the smallest balance first regardless of interest rate. When that account hits zero, you roll that payment into the next smallest. The psychological win of eliminating accounts completely keeps many people motivated. Research from Harvard Business Review confirms that the sense of progress from small wins sustains long-term behavior change — which matters if discipline is your challenge.
+        </p>
+
+        {/* CTA MID-ARTICLE */}
+        <div style={styles.ctaBox}>
+          <p style={styles.ctaTitle}>See Exactly How Long It Takes to Pay Off Your Debt</p>
+          <p style={styles.ctaText}>Use our free Loan EMI Calculator to model payoff timelines and compare repayment strategies side by side.</p>
+          <a href="/calculators" style={styles.ctaButton}>Try the Free Calculator</a>
+        </div>
+
+        <h2 style={styles.h2}>Balance Transfers and Debt Consolidation</h2>
+
+        <p style={styles.p}>
+          If you have strong credit (typically <span style={styles.highlight}>680+</span>), a <span style={styles.highlight}>0% intro APR balance transfer card</span> can be one of the fastest ways to eliminate credit card debt. Many cards offer 12–21 months interest-free. Transfer your high-rate balances, pay aggressively during the promotional period, and you can save thousands. Watch out for balance transfer fees (usually 3–5%) and make sure the debt is cleared before the intro period ends.
+        </p>
+
+        <p style={styles.p}>
+          A <span style={styles.highlight}>debt consolidation loan</span> replaces multiple high-rate debts with a single personal loan at a lower fixed rate. If you're paying 20%+ across several credit cards and qualify for a loan at 10–13%, the interest savings are substantial and the single monthly payment simplifies your finances. Compare APRs carefully — some lenders charge origination fees of 1–8% that can offset the benefit.
+        </p>
+
+        <h2 style={styles.h2}>7 Action Steps to Accelerate Your Debt Payoff</h2>
+
+        <div style={styles.tipsBox}>
+          <p style={styles.tipsTitle}>Practical Steps to Start This Week</p>
+          {[
+            { num: '1', text: 'List all debts with balance, interest rate, and minimum payment — total them. Seeing the full picture is the first step.' },
+            { num: '2', text: 'Build a $1,000 mini emergency fund first. Without it, unexpected expenses go straight back to the credit card.' },
+            { num: '3', text: 'Cancel subscriptions and redirect $50–$200/month directly to your target debt. Small recurring costs add up fast.' },
+            { num: '4', text: 'Call your credit card issuer and negotiate a lower APR. Customers with good payment history succeed roughly 70% of the time.' },
+            { num: '5', text: 'Set up automatic minimum payments on every account to protect your credit score, then manually pay extra on the target debt.' },
+            { num: '6', text: 'Put any windfall — tax refund, bonus, gift money — entirely toward debt. A $3,000 tax refund can eliminate a mid-size balance instantly.' },
+            { num: '7', text: 'Track progress monthly. Watching balances shrink provides the motivation to keep going through a multi-year payoff journey.' },
+          ].map(tip => (
+            <div key={tip.num} style={styles.tipItem}>
+              <div style={styles.tipNumber}>{tip.num}</div>
+              <p style={styles.tipText}>{tip.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={styles.h2}>How Long Will It Really Take?</h2>
+
+        <p style={styles.p}>
+          Timeline depends on how much extra you pay each month. On a $15,000 credit card balance at 22% APR, paying only minimums (~$375/month) takes over <span style={styles.highlight}>9 years</span> and costs $18,000+ in interest. Pay $700/month and you're done in <span style={styles.highlight}>under 3 years</span>, saving roughly $14,000. Pay $1,000/month and it's gone in just over <span style={styles.highlight}>18 months</span>. The math is stark: every extra $100/month meaningfully compresses your timeline and cuts total cost.
+        </p>
+
+        <p style={styles.p}>
+          Use FinancePro's Loan EMI Calculator to model your exact scenario. Input your balance, rate, and target monthly payment to see precise payoff dates and total interest paid under different strategies.
+        </p>
+
+        {/* CTA END */}
+        <div style={styles.ctaBox}>
+          <p style={styles.ctaTitle}>Calculate Your Debt-Free Date</p>
+          <p style={styles.ctaText}>Model your payoff timeline with our free Loan and Mortgage calculators. No signup, instant results.</p>
+          <a href="/calculators" style={styles.ctaButton}>Open Free Calculators</a>
+        </div>
+
+        <div style={styles.disclaimer}>
+          <strong style={{ color: '#b8c8d8' }}>Disclaimer:</strong> This article is for informational purposes only and does not constitute financial advice. Debt repayment outcomes vary based on individual circumstances including income, expenses, credit profile, and lender terms. Consult a licensed financial advisor or credit counselor before making significant financial decisions.
+        </div>
+
+      </article>
+
+      {/* FOOTER */}
+      <footer style={styles.footer}>
+        <a href="/" style={styles.footerLogo}>FinancePro</a>
+        <div style={styles.footerLinks}>
+          <a href="/" style={styles.footerLink}>Home</a>
+          <a href="/calculators" style={styles.footerLink}>Calculators</a>
+          <a href="/blog" style={styles.footerLink}>Blog</a>
+          <a href="/about" style={styles.footerLink}>About</a>
+          <a href="/privacy" style={styles.footerLink}>Privacy</a>
+        </div>
+        <p style={styles.footerCopy}>© {new Date().getFullYear()} FinancePro. All rights reserved.</p>
+      </footer>
+
+    </div>
+  );
+}
