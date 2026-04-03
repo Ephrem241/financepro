@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 200">
+  <!-- White version — use on gold/dark backgrounds -->
+  <text
+    x="440" y="108"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="96"
+    font-weight="400"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="-1"
+  >FinancePro</text>
+  <rect x="140" y="148" width="600" height="1.5" fill="rgba(255,255,255,0.4)"/>
+  <text
+    x="440" y="178"
+    font-family="'Courier New', Courier, monospace"
+    font-size="22"
+    font-weight="400"
+    fill="rgba(255,255,255,0.75)"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="8"
+  >YOUR MONEY, CALCULATED.</text>
+</svg>

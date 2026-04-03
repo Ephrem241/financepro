@@ -5,6 +5,15 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/icons/icon.svg',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

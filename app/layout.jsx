@@ -30,6 +30,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable}`}>
       <head>
+        {/* Favicon */}
+        <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
         {/* PWA */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#c9a84c" />

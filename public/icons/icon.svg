@@ -1,6 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#080d16"/>
-  <text x="256" y="300" font-family="Georgia, serif" font-size="220" font-weight="700"
-        fill="#c9a84c" text-anchor="middle" dominant-baseline="middle">FP</text>
-  <rect x="80" y="370" width="352" height="3" rx="2" fill="rgba(201,168,76,0.4)"/>
+  <!-- Background: brand gold matching cover -->
+  <rect width="512" height="512" rx="80" fill="#c9a84c"/>
+  <!-- "FinancePro" serif wordmark -->
+  <text
+    x="256" y="248"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="108"
+    font-weight="400"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="-2"
+  >FinancePro</text>
+  <!-- Divider line -->
+  <rect x="120" y="278" width="272" height="1.5" fill="rgba(255,255,255,0.45)"/>
+  <!-- Tagline -->
+  <text
+    x="256" y="316"
+    font-family="'Courier New', Courier, monospace"
+    font-size="28"
+    font-weight="400"
+    fill="rgba(255,255,255,0.85)"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="6"
+  >YOUR MONEY</text>
 </svg>
